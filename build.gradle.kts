@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.changelog) // Gradle Changelog Plugin
     alias(libs.plugins.qodana) // Gradle Qodana Plugin
     alias(libs.plugins.kover) // Gradle Kover Plugin
+    alias(libs.plugins.compose.multiplatform) // compose multi-platform
 }
 
 group = properties("pluginGroup").get()
@@ -18,12 +19,26 @@ version = properties("pluginVersion").get()
 
 // Configure project's dependencies
 repositories {
+    gradlePluginPortal()
+    google()
     mavenCentral()
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
+    maven("https://androidx.dev/storage/compose-compiler/repository")
 }
 
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
-//    implementation(libs.annotations)
+    implementation(libs.annotations)
+    implementation(compose.material3)
+    implementation(compose.runtime)
+    implementation(compose.desktop.common)
+    implementation(compose.desktop.linux_x64)
+    implementation(compose.desktop.linux_arm64)
+    implementation(compose.desktop.windows_x64)
+    implementation(compose.desktop.macos_x64)
+    implementation(compose.desktop.macos_arm64)
 }
 
 // Set the JVM language level used to build the project. Use Java 11 for 2020.3+, and Java 17 for 2022.2+.
@@ -128,4 +143,19 @@ tasks {
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
         channels = properties("pluginVersion").map { listOf(it.split('-').getOrElse(1) { "default" }.split('.').first()) }
     }
+}
+
+compose {
+    experimental {
+        web {
+            application {
+            }
+        }
+        desktop {
+            application {
+            }
+        }
+    }
+    kotlinCompilerPlugin.set(libs.versions.compose.multiplatform.compiler)
+    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }

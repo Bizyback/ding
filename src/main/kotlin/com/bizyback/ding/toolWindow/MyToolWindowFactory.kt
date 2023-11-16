@@ -1,4 +1,4 @@
-package com.github.mambobryan.ding.toolWindow
+package com.bizyback.ding.toolWindow
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
@@ -8,8 +8,8 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBPanel
 import com.intellij.ui.content.ContentFactory
-import com.github.mambobryan.ding.MyBundle
-import com.github.mambobryan.ding.services.MyProjectService
+import com.bizyback.ding.DingBundle
+import com.bizyback.ding.services.MyProjectService
 import javax.swing.JButton
 
 
@@ -32,12 +32,12 @@ class MyToolWindowFactory : ToolWindowFactory {
         private val service = toolWindow.project.service<MyProjectService>()
 
         fun getContent() = JBPanel<JBPanel<*>>().apply {
-            val label = JBLabel(MyBundle.message("randomLabel", "?"))
+            val label = JBLabel("Random number")
 
             add(label)
-            add(JButton(MyBundle.message("shuffle")).apply {
+            add(JButton("Shuffle").apply {
                 addActionListener {
-                    label.text = MyBundle.message("randomLabel", service.getRandomNumber())
+                    label.text = "Random number = ${service.getRandomNumber()}"
                 }
             })
         }
