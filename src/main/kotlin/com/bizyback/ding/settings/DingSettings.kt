@@ -22,7 +22,7 @@ class DingSettings : PersistentStateComponent<Element?> {
 
     enum class KEY(private val key: String) {
         ROOT("IgnoreSettings"),
-        TUTORIAL_SHOWN("tutorialShown"),
+        NOTIFICATION_SHOWN("notificationShown"),
         TUTORIAL_DINGED("tutorialDinged"),
         DARK_MODE_ENABLED("dark_mode_enabled"),
         START("start"),
@@ -47,8 +47,7 @@ class DingSettings : PersistentStateComponent<Element?> {
 
     }
 
-    var tutorialShown = false
-    var tutorialShook = false
+    var notificationShown = false
 
     var isDarkModeEnabled = false
 
@@ -77,8 +76,7 @@ class DingSettings : PersistentStateComponent<Element?> {
     var canceledTone: Tone = CanceledTone.Axe
 
     override fun getState() = Element(KEY.ROOT.toString()).apply {
-        setAttribute(KEY.TUTORIAL_SHOWN.toString(), tutorialShown.toString())
-        setAttribute(KEY.TUTORIAL_DINGED.toString(), tutorialShook.toString())
+        setAttribute(KEY.NOTIFICATION_SHOWN.toString(), notificationShown.toString())
         setAttribute(KEY.DARK_MODE_ENABLED.toString(), isDarkModeEnabled.toString())
         // run ding settings
         setAttribute(KEY.RUN_ENABLED.toString(), runEnabled.toString())
@@ -108,8 +106,7 @@ class DingSettings : PersistentStateComponent<Element?> {
 
     override fun loadState(element: Element) {
         element.apply {
-            getAttributeValue(KEY.TUTORIAL_SHOWN.toString())?.let { tutorialShown = it.toBoolean() }
-            getAttributeValue(KEY.TUTORIAL_DINGED.toString())?.let { tutorialShook = it.toBoolean() }
+            getAttributeValue(KEY.NOTIFICATION_SHOWN.toString())?.let { notificationShown = it.toBoolean() }
             getAttributeValue(KEY.DARK_MODE_ENABLED.toString())?.let { isDarkModeEnabled = it.toBoolean() }
             // run settings
             getAttributeValue(KEY.RUN_ENABLED.toString())?.let { runEnabled = it.toBoolean() }

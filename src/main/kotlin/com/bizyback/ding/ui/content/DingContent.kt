@@ -1,18 +1,27 @@
 package com.bizyback.ding.ui.content
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.bizyback.ding.DingBundle.message
 import com.bizyback.ding.settings.DingSettings
+import com.bizyback.ding.ui.theme.onSuccess
+import com.bizyback.ding.ui.theme.success
 import com.bizyback.ding.utils.Tone
 import com.bizyback.ding.utils.ring
 import com.bizyback.ding.utils.tones.*
+import com.intellij.util.ui.UIUtil
 
 /**
  *
@@ -34,8 +43,22 @@ fun DingContent(
 
     var run by remember { mutableStateOf(DingConfigurationUI(settings.runEnabled, settings.runTone)) }
     var indexing by remember { mutableStateOf(DingConfigurationUI(settings.indexingEnabled, settings.indexingTone)) }
-    var testsPassed by remember { mutableStateOf(DingConfigurationUI(settings.testsPassedEnabled, settings.testsPassedTone)) }
-    var testsFailed by remember { mutableStateOf(DingConfigurationUI(settings.testsFailedEnabled, settings.testsFailedTone)) }
+    var testsPassed by remember {
+        mutableStateOf(
+            DingConfigurationUI(
+                settings.testsPassedEnabled,
+                settings.testsPassedTone
+            )
+        )
+    }
+    var testsFailed by remember {
+        mutableStateOf(
+            DingConfigurationUI(
+                settings.testsFailedEnabled,
+                settings.testsFailedTone
+            )
+        )
+    }
     var start by remember { mutableStateOf(DingConfigurationUI(settings.startEnabled, settings.startTone)) }
     var success by remember { mutableStateOf(DingConfigurationUI(settings.successEnabled, settings.successTone)) }
     var failed by remember { mutableStateOf(DingConfigurationUI(settings.failedEnabled, settings.failedTone)) }
@@ -47,27 +70,32 @@ fun DingContent(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    text = message("notification.project")
-                )
+                val painter = painterResource("/images/plain.png")
+                Image(modifier = Modifier.width(75.dp).height(75.dp), painter = painter, contentDescription = "")
+                Column(modifier = Modifier.padding(start = 16.dp)) {
+                    Text(
+                        text = message("notification.project"),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 32.sp
+                    )
+                    Text(
+                        text = message("notification.developers"),
+                        fontSize = MaterialTheme.typography.caption.fontSize
+                    )
+                }
             }
-            Text(
-                modifier = Modifier.padding(top = 16.dp),
-                text = message("configure.title"),
-                fontSize = MaterialTheme.typography.h4.fontSize
-            )
             Text(
                 modifier = Modifier.padding(top = 8.dp),
                 text = message("configure.description")
             )
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .padding(vertical = 16.dp)
-                .verticalScroll(rememberScrollState())
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(vertical = 16.dp)
+                    .verticalScroll(rememberScrollState())
             ) {
                 ConfigurationItemUI(
                     modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
@@ -217,7 +245,10 @@ fun DingContent(
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Button(
                     onClick = onDismissDialogClicked,
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Green, contentColor = Color.Black)
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = MaterialTheme.colors.success,
+                        contentColor = MaterialTheme.colors.onSuccess
+                    )
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 4.dp, horizontal = 16.dp),

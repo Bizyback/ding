@@ -17,6 +17,22 @@
                            toolWindowId="Project"/>
     </extensions>
 
+    <actions>
+        <action
+                id="ding"
+                text="Ding"
+                class="com.bizyback.ding.actions.DingConfigureAction"
+                description="Open dialog to configure Ding option"
+                icon="icons/icon.png"
+        >
+            <add-to-group
+                    group-id="ToolsMenu"
+                    relative-to-action="GenerateJavadoc"
+                    anchor="after"/>
+            <synonym text="Configure Ding"/>
+        </action>
+    </actions>
+
     <applicationListeners>
         <listener class="com.bizyback.ding.listeners.DingDarkModeListener"
                   topic="org.jetbrains.plugins.notebooks.visualization.r.inlays.components.DarkModeNotifier"/>

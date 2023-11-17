@@ -53,9 +53,7 @@ class DingConfigureDialog(
 
         // populate composable
         composePanel.setContent {
-            DingTheme(
-                isDarkModeEnabled = settings.isDarkModeEnabled
-            ) {
+            DingTheme {
                 DingContent(
                     settings = settings,
                     onDismissDialogClicked = {

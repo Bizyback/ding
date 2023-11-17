@@ -1,5 +1,7 @@
 package com.bizyback.ding.ui.theme
 
+import androidx.compose.material.Colors
+import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.graphics.Color
 
 /**
@@ -79,3 +81,14 @@ internal val Error = Color(0xFFd91a1a)
 internal val ErrorDark = Color(0xFFe66666)
 internal val OnError = white
 internal val OnErrorDark = black
+
+internal val Success = Color(0xFF23CE6B)
+internal val SuccessDark = Color(0xFF3FDE82)
+internal val OnSuccess = black
+internal val OnSuccessDark = black
+
+val Colors.success
+    get() = if (isLight) Success else SuccessDark
+
+val Colors.onSuccess
+    get() = if (isLight) OnSuccess else OnSuccessDark

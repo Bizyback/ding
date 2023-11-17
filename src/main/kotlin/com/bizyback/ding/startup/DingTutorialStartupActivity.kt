@@ -27,8 +27,8 @@ class DingTutorialStartupActivity : StartupActivity {
     private fun creatAction(value: String, action: () -> Unit) = ButtonAnAction.create(message(value)) { action() }
 
     override fun runActivity(project: Project) {
-//        if (settings.tutorialShown) return
-//        settings.tutorialShown = true
+        if (settings.notificationShown) return
+        settings.notificationShown = true
         with(project) {
             notify(
                 message("notification.welcome.title"),
@@ -39,7 +39,7 @@ class DingTutorialStartupActivity : StartupActivity {
                 addAction(creatAction("notification.action.configure") { showDingConfigurationDialog() })
             }
         }
-//        settings.tutorialShown = false
+        settings.notificationShown = false
     }
 
 }

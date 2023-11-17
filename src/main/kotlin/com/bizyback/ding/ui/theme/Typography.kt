@@ -17,9 +17,9 @@ import androidx.compose.ui.text.platform.Font
  */
 //
 //private val fonts = FontFamily(
-////    Font(resource = "font/productsans.ttf", weight = FontWeight.Normal),
-////    Font(resource = "font/productsansmedium.ttf", weight = FontWeight.Medium),
-////    Font(resource = "font/productsansbold.ttf", weight = FontWeight.Bold),
+////    Font(resource = "font/normal.ttf", weight = FontWeight.Normal),
+////    Font(resource = "font/medium.ttf", weight = FontWeight.Medium),
+////    Font(resource = "font/bold.ttf", weight = FontWeight.Bold),
 //)
 
 val DingTypography = Typography(

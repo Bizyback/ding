@@ -12,6 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.bizyback.ding.ui.theme.onSuccess
+import com.bizyback.ding.ui.theme.success
 import com.bizyback.ding.utils.Tone
 
 /**
@@ -107,8 +109,8 @@ fun ConfigurationItemUI(
         Card(
             modifier = Modifier.padding(start = 8.dp),
             onClick = onToneToggleClicked,
-            backgroundColor = if (item.enabled) Color.Green else Color.Red,
-            contentColor = if (item.enabled) Color.Black else Color.White,
+            backgroundColor = if (item.enabled) MaterialTheme.colors.success else MaterialTheme.colors.error,
+            contentColor = if (item.enabled) MaterialTheme.colors.onSuccess else MaterialTheme.colors.onError,
         ) {
             Row {
                 IconButton(modifier = Modifier, onClick = onToneToggleClicked) {

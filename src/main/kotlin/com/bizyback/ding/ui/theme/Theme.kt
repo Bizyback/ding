@@ -16,11 +16,10 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun DingTheme(
-    isDarkModeEnabled: Boolean,
     content: @Composable () -> Unit,
 ) {
     MaterialTheme(
-        colors = getColors(isDarkModeEnabled = isDarkModeEnabled),
+        colors = DingColors,
         shapes = DingShapes,
         typography = DingTypography,
         content = content
