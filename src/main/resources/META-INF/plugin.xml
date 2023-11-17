@@ -20,10 +20,16 @@
     <applicationListeners>
         <listener class="com.bizyback.ding.listeners.DingDarkModeListener"
                   topic="org.jetbrains.plugins.notebooks.visualization.r.inlays.components.DarkModeNotifier"/>
+
         <listener class="com.bizyback.ding.listeners.DingBuildListener"
                   topic="com.android.tools.idea.gradle.project.build.GradleBuildListener"/>
+
+        <listener class="com.bizyback.ding.listeners.DingTestsListener"
+                  topic="com.intellij.execution.testframework.sm.runner.SMTRunnerEventsListener"/>
+
         <listener class="com.bizyback.ding.listeners.DingRunListener"
                   topic="com.intellij.execution.ExecutionListener"/>
+
         <listener class="com.bizyback.ding.listeners.DingIndexingListener"
                   topic="com.intellij.util.indexing.diagnostic.ProjectIndexingHistoryListener"/>
     </applicationListeners>
