@@ -20,10 +20,6 @@ internal class DingRunListener : ExecutionListener {
 
     private val settings = service<DingSettings>()
 
-    override fun processStarted(executorId: String, env: ExecutionEnvironment, handler: ProcessHandler) {
-        ring(settings.startTone)
-    }
-
     override fun processTerminated(
         executorId: String,
         env: ExecutionEnvironment,

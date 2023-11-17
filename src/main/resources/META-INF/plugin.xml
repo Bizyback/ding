@@ -13,13 +13,13 @@
         <toolWindow factoryClass="com.bizyback.ding.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <applicationService serviceImplementation="com.bizyback.ding.settings.DingSettings"/>
         <backgroundPostStartupActivity implementation="com.bizyback.ding.startup.DingTutorialStartupActivity"/>
-        <!--        <backgroundPostStartupActivity implementation="ski.chrzanow.shakeoff.startup.ShakeOffStartupActivity"/>-->
-        <!--        <backgroundPostStartupActivity implementation="ski.chrzanow.shakeoff.startup.TutorialStartupActivity"/>-->
         <notificationGroup bundle="messages.DingBundle" displayType="BALLOON" id="Ding" key="notification.project"
                            toolWindowId="Project"/>
     </extensions>
 
     <applicationListeners>
+        <listener class="com.bizyback.ding.listeners.DingDarkModeListener"
+                  topic="org.jetbrains.plugins.notebooks.visualization.r.inlays.components.DarkModeNotifier"/>
         <listener class="com.bizyback.ding.listeners.DingBuildListener"
                   topic="com.android.tools.idea.gradle.project.build.GradleBuildListener"/>
         <listener class="com.bizyback.ding.listeners.DingRunListener"

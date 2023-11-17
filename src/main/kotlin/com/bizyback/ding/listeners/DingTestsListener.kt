@@ -50,7 +50,10 @@ class DingTestsListener : SMTRunnerEventsListener {
     }
 
     override fun onSuiteFinished(suite: SMTestProxy) {
-        if (settings.testingEnabled) ring(settings.testingTone)
+        when(suite.isPassed){
+            true -> if (settings.testsPassedEnabled) ring(settings.testsPassedTone)
+            false -> if (settings.testsFailedEnabled) ring(settings.testsFailedTone)
+        }
     }
 
     override fun onSuiteStarted(suite: SMTestProxy) {

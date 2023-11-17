@@ -34,7 +34,8 @@ fun DingContent(
 
     var run by remember { mutableStateOf(DingConfigurationUI(settings.runEnabled, settings.runTone)) }
     var indexing by remember { mutableStateOf(DingConfigurationUI(settings.indexingEnabled, settings.indexingTone)) }
-    var testing by remember { mutableStateOf(DingConfigurationUI(settings.testingEnabled, settings.testingTone)) }
+    var testsPassed by remember { mutableStateOf(DingConfigurationUI(settings.testsPassedEnabled, settings.testsPassedTone)) }
+    var testsFailed by remember { mutableStateOf(DingConfigurationUI(settings.testsFailedEnabled, settings.testsFailedTone)) }
     var start by remember { mutableStateOf(DingConfigurationUI(settings.startEnabled, settings.startTone)) }
     var success by remember { mutableStateOf(DingConfigurationUI(settings.successEnabled, settings.successTone)) }
     var failed by remember { mutableStateOf(DingConfigurationUI(settings.failedEnabled, settings.failedTone)) }
@@ -107,19 +108,37 @@ fun DingContent(
                 ConfigurationItemUI(
                     modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
                     item = ConfigurationItem(
-                        enabled = testing.enabled,
-                        title = message("configure.build.testing"),
-                        selection = testing.tone,
+                        enabled = testsPassed.enabled,
+                        title = message("configure.build.tests.passed"),
+                        selection = testsPassed.tone,
                         options = StartToneKey.values().map { it.tone }
                     ),
                     onToneSelected = {
-                        settings.testingTone = it
-                        testing = testing.copy(tone = settings.testingTone)
+                        settings.testsPassedTone = it
+                        testsPassed = testsPassed.copy(tone = settings.testsPassedTone)
                     },
-                    onTonePlayClicked = { ring(settings.testingTone) },
+                    onTonePlayClicked = { ring(settings.testsPassedTone) },
                     onToneToggleClicked = {
-                        settings.testingEnabled = settings.testingEnabled.not()
-                        testing = testing.copy(enabled = settings.testingEnabled)
+                        settings.testsPassedEnabled = settings.testsPassedEnabled.not()
+                        testsPassed = testsPassed.copy(enabled = settings.testsPassedEnabled)
+                    }
+                )
+                ConfigurationItemUI(
+                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                    item = ConfigurationItem(
+                        enabled = testsFailed.enabled,
+                        title = message("configure.build.tests.failed"),
+                        selection = testsFailed.tone,
+                        options = StartToneKey.values().map { it.tone }
+                    ),
+                    onToneSelected = {
+                        settings.testsFailedTone = it
+                        testsFailed = testsFailed.copy(tone = settings.testsFailedTone)
+                    },
+                    onTonePlayClicked = { ring(settings.testsFailedTone) },
+                    onToneToggleClicked = {
+                        settings.testsFailedEnabled = settings.testsFailedEnabled.not()
+                        testsFailed = testsFailed.copy(enabled = settings.testsFailedEnabled)
                     }
                 )
                 ConfigurationItemUI(
@@ -177,7 +196,7 @@ fun DingContent(
                     }
                 )
                 ConfigurationItemUI(
-                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                     item = ConfigurationItem(
                         enabled = canceled.enabled,
                         title = message("configure.build.finish.canceled"),

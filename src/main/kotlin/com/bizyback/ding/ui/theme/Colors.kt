@@ -70,7 +70,7 @@ internal val BackgroundDark = Color(0xFF2B2A2B)
 internal val OnBackground = gray900
 internal val OnBackgroundDark = white
 
-internal val Surface = white
+internal val Surface = Color(0xFFF2F2F2)
 internal val SurfaceDark = Color(0xFF3C3F41)
 internal val OnSurface = black
 internal val OnSurfaceDark = white

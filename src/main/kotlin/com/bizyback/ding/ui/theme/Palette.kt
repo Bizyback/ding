@@ -42,6 +42,11 @@ private val LightColors = lightColors(
     onError = OnError,
 )
 
+fun getColors(isDarkModeEnabled: Boolean) = if (isDarkModeEnabled)
+    DarkColors
+else
+    LightColors
+
 val DingColors: Colors
     @Composable
     get() =

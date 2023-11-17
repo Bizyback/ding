@@ -108,7 +108,7 @@ fun ConfigurationItemUI(
             modifier = Modifier.padding(start = 8.dp),
             onClick = onToneToggleClicked,
             backgroundColor = if (item.enabled) Color.Green else Color.Red,
-            contentColor = Color.Black
+            contentColor = if (item.enabled) Color.Black else Color.White,
         ) {
             Row {
                 IconButton(modifier = Modifier, onClick = onToneToggleClicked) {
