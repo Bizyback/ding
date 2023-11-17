@@ -1,7 +1,11 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# ding Changelog
+# Ding Changelog
 
-## [Unreleased]
+## [0.0.1] - 2023.11.17
 ### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+- Adds plugin functionality
+
+## [0.0.2] - 2023.11.17
+### Fixed
+- Fixed not working for Build
