@@ -1,4 +1,4 @@
-package com.bizyback.ding.utils.ring
+package com.bizyback.ding.utils
 
 import com.intellij.util.ui.UIUtil
 

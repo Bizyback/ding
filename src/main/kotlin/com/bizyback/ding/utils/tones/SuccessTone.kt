@@ -1,4 +1,6 @@
-package com.bizyback.ding.utils.ring
+package com.bizyback.ding.utils.tones
+
+import com.bizyback.ding.utils.Tone
 
 /**
  *
@@ -13,8 +15,8 @@ sealed class SuccessTone(value: String) : Tone(source = value) {
 
     data object Victory : StartTone(value = "victory")
     data object Triumph : StartTone(value = "triumph")
-    data object Eureka : StartTone(value = "victory")
-    data object Favor : StartTone(value = "triumph")
+    data object Eureka : StartTone(value = "eureka")
+    data object Favor : StartTone(value = "favor")
 
 }
 
@@ -34,10 +36,5 @@ enum class SuccessToneKey {
         }
 }
 
-val String.successTone
-    get() = when (SuccessToneKey.from(this)) {
-        SuccessToneKey.victory -> SuccessTone.Victory
-        SuccessToneKey.triumph -> SuccessTone.Triumph
-        SuccessToneKey.eureka -> SuccessTone.Eureka
-        SuccessToneKey.favor -> SuccessTone.Favor
-    }
+val String.successToneKey
+    get() = SuccessToneKey.from(this)

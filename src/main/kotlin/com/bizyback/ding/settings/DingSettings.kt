@@ -1,7 +1,7 @@
 package com.bizyback.ding.settings
 
-import com.bizyback.ding.utils.ring.*
-import com.intellij.configurationStore.clearBindingCache
+import com.bizyback.ding.utils.Tone
+import com.bizyback.ding.utils.tones.*
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
@@ -29,55 +29,96 @@ class DingSettings : PersistentStateComponent<Element?> {
         SUCCESS("success"),
         SUCCESS_ENABLED("success_enabled"),
         FAILURE("failure"),
-        CANCELLED("cancelled"), ;
+        FAILURE_ENABLED("failure_enabled"),
+        CANCEL("CANCEL"),
+        CANCEL_ENABLED("cancel_enabled"),
+        TESTING("testing"),
+        TESTING_ENABLED("testing_enabled"),
+        INDEXING("indexing"),
+        INDEXING_ENABLED("indexing_enabled"),
+        RUN("run"),
+        RUN_ENABLED("run_enabled"),
+        ;
 
         override fun toString() = key
+
     }
 
     var tutorialShown = false
     var tutorialShook = false
 
+    var runEnabled = true
+    var runTone: Tone = RunTone.Bolt
+
+    var indexingEnabled = true
+    var indexingTone: Tone = IndexingTone.Diagnose
+
+    var testingEnabled = true
+    var testingTone: Tone = TestingTone.Analyse
+
     var startEnabled = true
     var startTone: Tone = StartTone.Begin
 
     var successEnabled = true
-    var successTone: Tone = SuccessTone.Victory
+    var successTone: Tone = SuccessTone.Eureka
 
-    init {
-        clearBindingCache()
-    }
+    var failedEnabled = true
+    var failedTone: Tone = FailedTone.Dim
+
+    var canceledEnabled = true
+    var canceledTone: Tone = CanceledTone.Axe
 
     override fun getState() = Element(KEY.ROOT.toString()).apply {
         setAttribute(KEY.TUTORIAL_SHOWN.toString(), tutorialShown.toString())
         setAttribute(KEY.TUTORIAL_DINGED.toString(), tutorialShook.toString())
+        // run ding settings
+        setAttribute(KEY.RUN_ENABLED.toString(), runEnabled.toString())
+        setAttribute(KEY.RUN.toString(), runTone.source)
+        // indexing ding settings
+        setAttribute(KEY.INDEXING_ENABLED.toString(), indexingEnabled.toString())
+        setAttribute(KEY.INDEXING.toString(), indexingTone.source)
+        // testing ding settings
+        setAttribute(KEY.TESTING_ENABLED.toString(), testingEnabled.toString())
+        setAttribute(KEY.TESTING.toString(), testingTone.source)
         // build start ding settings
         setAttribute(KEY.START_ENABLED.toString(), startEnabled.toString())
         setAttribute(KEY.START.toString(), startTone.source)
         // build success ding settings
         setAttribute(KEY.SUCCESS_ENABLED.toString(), successEnabled.toString())
         setAttribute(KEY.SUCCESS.toString(), successTone.source)
+        // build failure ding settings
+        setAttribute(KEY.FAILURE_ENABLED.toString(), failedEnabled.toString())
+        setAttribute(KEY.FAILURE.toString(), failedTone.source)
+        // build canceled ding settings
+        setAttribute(KEY.CANCEL_ENABLED.toString(), canceledEnabled.toString())
+        setAttribute(KEY.CANCEL.toString(), canceledTone.source)
     }
 
     override fun loadState(element: Element) {
         element.apply {
-            getAttributeValue(KEY.TUTORIAL_SHOWN.toString())?.let {
-                tutorialShown = it.toBoolean()
-            }
-            getAttributeValue(KEY.TUTORIAL_DINGED.toString())?.let {
-                tutorialShook = it.toBoolean()
-            }
-            getAttributeValue(KEY.START_ENABLED.toString())?.let {
-                startEnabled = it.toBoolean()
-            }
-            getAttributeValue(KEY.START.toString())?.let {
-                startTone = it.startTone
-            }
-            getAttributeValue(KEY.SUCCESS_ENABLED.toString())?.let {
-                successEnabled = it.toBoolean()
-            }
-            getAttributeValue(KEY.SUCCESS.toString())?.let {
-                successTone = it.successTone
-            }
+            getAttributeValue(KEY.TUTORIAL_SHOWN.toString())?.let { tutorialShown = it.toBoolean() }
+            getAttributeValue(KEY.TUTORIAL_DINGED.toString())?.let { tutorialShook = it.toBoolean() }
+            // run settings
+            getAttributeValue(KEY.RUN_ENABLED.toString())?.let { runEnabled = it.toBoolean() }
+            getAttributeValue(KEY.RUN.toString())?.let { runTone = it.runToneKey.tone }
+            // indexing
+            getAttributeValue(KEY.INDEXING_ENABLED.toString())?.let { indexingEnabled = it.toBoolean() }
+            getAttributeValue(KEY.INDEXING.toString())?.let { indexingTone = it.indexingToneKey.tone }
+            // testing
+            getAttributeValue(KEY.TESTING_ENABLED.toString())?.let { testingEnabled = it.toBoolean() }
+            getAttributeValue(KEY.TESTING.toString())?.let { testingTone = it.testingToneKey.tone }
+            // build start
+            getAttributeValue(KEY.START_ENABLED.toString())?.let { startEnabled = it.toBoolean() }
+            getAttributeValue(KEY.START.toString())?.let { startTone = it.startToneKey.tone }
+            // build succeeded
+            getAttributeValue(KEY.SUCCESS_ENABLED.toString())?.let { successEnabled = it.toBoolean() }
+            getAttributeValue(KEY.SUCCESS.toString())?.let { successTone = it.successToneKey.tone }
+            // build failure
+            getAttributeValue(KEY.FAILURE_ENABLED.toString())?.let { failedEnabled = it.toBoolean() }
+            getAttributeValue(KEY.FAILURE.toString())?.let { failedTone = it.failedToneKey.tone }
+            // build cancel
+            getAttributeValue(KEY.CANCEL_ENABLED.toString())?.let { canceledEnabled = it.toBoolean() }
+            getAttributeValue(KEY.CANCEL.toString())?.let { canceledTone = it.canceledToneKey.tone }
         }
     }
 

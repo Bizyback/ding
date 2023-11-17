@@ -5,6 +5,7 @@
     <vendor email="hive@bizyback.com">Bizyback</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.android</depends>
 
     <resource-bundle>messages.DingBundle</resource-bundle>
 
@@ -12,13 +13,18 @@
         <toolWindow factoryClass="com.bizyback.ding.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <applicationService serviceImplementation="com.bizyback.ding.settings.DingSettings"/>
         <backgroundPostStartupActivity implementation="com.bizyback.ding.startup.DingTutorialStartupActivity"/>
-<!--        <backgroundPostStartupActivity implementation="ski.chrzanow.shakeoff.startup.ShakeOffStartupActivity"/>-->
-<!--        <backgroundPostStartupActivity implementation="ski.chrzanow.shakeoff.startup.TutorialStartupActivity"/>-->
-        <notificationGroup bundle="messages.DingBundle" displayType="BALLOON" id="Ding" key="notification.project" toolWindowId="Project"/>
+        <!--        <backgroundPostStartupActivity implementation="ski.chrzanow.shakeoff.startup.ShakeOffStartupActivity"/>-->
+        <!--        <backgroundPostStartupActivity implementation="ski.chrzanow.shakeoff.startup.TutorialStartupActivity"/>-->
+        <notificationGroup bundle="messages.DingBundle" displayType="BALLOON" id="Ding" key="notification.project"
+                           toolWindowId="Project"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.bizyback.ding.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-        <listener class="com.bizyback.ding.listeners.DingBuildListener" topic="com.intellij.build.BuildProgressListener"/>
+        <listener class="com.bizyback.ding.listeners.DingBuildListener"
+                  topic="com.android.tools.idea.gradle.project.build.GradleBuildListener"/>
+        <listener class="com.bizyback.ding.listeners.DingRunListener"
+                  topic="com.intellij.execution.ExecutionListener"/>
+        <listener class="com.bizyback.ding.listeners.DingIndexingListener"
+                  topic="com.intellij.util.indexing.diagnostic.ProjectIndexingHistoryListener"/>
     </applicationListeners>
 </idea-plugin>

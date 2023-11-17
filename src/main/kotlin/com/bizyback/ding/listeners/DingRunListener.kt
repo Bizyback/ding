@@ -1,5 +1,12 @@
 package com.bizyback.ding.listeners
 
+import com.bizyback.ding.settings.DingSettings
+import com.bizyback.ding.utils.ring
+import com.intellij.execution.ExecutionListener
+import com.intellij.execution.process.ProcessHandler
+import com.intellij.execution.runners.ExecutionEnvironment
+import com.intellij.openapi.components.service
+
 /**
  *
  * @project  ding
@@ -9,5 +16,21 @@ package com.bizyback.ding.listeners
  * @time     10:59 am
  *
  */
-internal class DingRunListener {
+internal class DingRunListener : ExecutionListener {
+
+    private val settings = service<DingSettings>()
+
+    override fun processStarted(executorId: String, env: ExecutionEnvironment, handler: ProcessHandler) {
+        ring(settings.startTone)
+    }
+
+    override fun processTerminated(
+        executorId: String,
+        env: ExecutionEnvironment,
+        handler: ProcessHandler,
+        exitCode: Int
+    ) {
+        ring(settings.successTone)
+    }
+
 }

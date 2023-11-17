@@ -4,7 +4,7 @@ import com.bizyback.ding.DingBundle.message
 import com.bizyback.ding.dialog.showDingConfigurationDialog
 import com.bizyback.ding.settings.DingSettings
 import com.bizyback.ding.utils.notify
-import com.bizyback.ding.utils.ring.ring
+import com.bizyback.ding.utils.ring
 import com.intellij.ide.plugins.newui.ListPluginComponent.ButtonAnAction
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.components.service
@@ -35,7 +35,7 @@ class DingTutorialStartupActivity : StartupActivity {
                 message("notification.welcome.description"),
                 NotificationType.INFORMATION,
             ){
-                addAction(creatAction("notification.action.try") { ring(settings.startTone) })
+                addAction(creatAction("notification.action.ding") { ring(settings.startTone) })
                 addAction(creatAction("notification.action.configure") { showDingConfigurationDialog() })
             }
         }

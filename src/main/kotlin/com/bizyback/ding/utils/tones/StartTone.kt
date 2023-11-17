@@ -1,4 +1,6 @@
-package com.bizyback.ding.utils.ring
+package com.bizyback.ding.utils.tones
+
+import com.bizyback.ding.utils.Tone
 
 /**
  *
@@ -13,16 +15,16 @@ sealed class StartTone(val value: String) : Tone(source = value) {
 
     data object Begin : StartTone(value = "begin")
     data object Dawn : StartTone(value = "dawn")
-    data object Inception : StartTone(value = "begin")
-    data object Genesis : StartTone(value = "dawn")
+    data object Inception : StartTone(value = "inception")
+    data object Genesis : StartTone(value = "genesis")
 
 }
 
-enum class StartKey {
+enum class StartToneKey {
     begin, dawn, inception, genesis;
 
     companion object {
-        fun from(value: String) = StartKey.valueOf(value)
+        fun from(value: String) = StartToneKey.valueOf(value)
     }
 
     val tone: Tone
@@ -35,11 +37,6 @@ enum class StartKey {
 
 }
 
-val String.startTone
-    get() = when (StartKey.from(this)) {
-        StartKey.begin -> StartTone.Begin
-        StartKey.dawn -> StartTone.Dawn
-        StartKey.inception -> StartTone.Inception
-        StartKey.genesis -> StartTone.Genesis
-    }
+val String.startToneKey
+    get() = StartToneKey.from(this)
 

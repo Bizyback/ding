@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.bizyback.ding.utils.ring.Tone
+import com.bizyback.ding.utils.Tone
 
 /**
  *
@@ -46,47 +46,54 @@ fun ConfigurationItemUI(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Card(modifier = Modifier.weight(1f), onClick = { expanded = expanded.not() }) {
+        Card(
+            modifier = Modifier.weight(1f),
+            onClick = {
+//                expanded = expanded.not()
+            }
+        ) {
             Row(
-                modifier = Modifier.padding(0.dp).fillMaxWidth(),
+                modifier = Modifier.padding(14.dp).fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(modifier = Modifier.padding(start = 16.dp), text = item.title)
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "(${item.selection})",
+                        text = "(${item.selection.source.replaceFirstChar { it.uppercase() }})",
                         fontSize = MaterialTheme.typography.caption.fontSize
                     )
-                    Box(
-                        modifier = Modifier
-                    ) {
-                        IconButton(onClick = { expanded = true }) {
-                            Icon(Icons.Default.KeyboardArrowDown, contentDescription = "Localized description")
-                        }
-                        DropdownMenu(
-                            expanded = expanded,
-                            onDismissRequest = { expanded = false }
+                    val visible = false
+                    if (visible)
+                        Box(
+                            modifier = Modifier
                         ) {
-                            for (option in item.options) {
-                                DropdownMenuItem(
-                                    onClick = {
-                                        expanded = expanded.not()
-                                        onToneSelected.invoke(option)
-                                    },
-                                ) {
-                                    Text(text = option.source)
-                                    if (option.source == item.selection.source)
-                                        Icon(
-                                            modifier = Modifier.padding(start = 8.dp),
-                                            imageVector = Icons.Default.Check,
-                                            contentDescription = ""
-                                        )
+                            IconButton(onClick = { expanded = true }) {
+                                Icon(Icons.Default.KeyboardArrowDown, contentDescription = "Localized description")
+                            }
+                            DropdownMenu(
+                                expanded = expanded,
+                                onDismissRequest = { expanded = false }
+                            ) {
+                                for (option in item.options) {
+                                    DropdownMenuItem(
+                                        onClick = {
+                                            expanded = expanded.not()
+                                            onToneSelected.invoke(option)
+                                        },
+                                    ) {
+                                        Text(text = option.source.replaceFirstChar { it.uppercase() })
+                                        if (option.source == item.selection.source)
+                                            Icon(
+                                                modifier = Modifier.padding(start = 8.dp),
+                                                imageVector = Icons.Default.Check,
+                                                contentDescription = ""
+                                            )
+                                    }
+                                    Divider(modifier = Modifier.fillMaxWidth())
                                 }
-                                Divider(modifier = Modifier.fillMaxWidth())
                             }
                         }
-                    }
                 }
             }
         }
