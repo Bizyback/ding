@@ -48,11 +48,6 @@ This is a minimal IntelliJ Platform Plugin that makes a notification sound for s
 
 - Add a usage guide here
 
-# Download
-<iframe width="384px" height="319px" src="https://plugins.jetbrains.com/embeddable/card/23147"></iframe>
-
-<iframe width="245px" height="48px" src="https://plugins.jetbrains.com/embeddable/install/23147"></iframe>
-
 ## Contributing
 
 ![GitHub tag (latest by date)](https://img.shields.io:/github/v/tag/bizyback/hatch?style=for-the-badge)

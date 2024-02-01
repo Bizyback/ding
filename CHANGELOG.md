@@ -9,5 +9,5 @@
 - Adds plugin functionality
 
 ## [0.0.2] - 2023.11.17
-### 
+### Fixed
 - Fixed not working for Build
