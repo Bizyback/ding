@@ -1,7 +1,7 @@
 
 <p align="center"><img width=100% src="/.github/images/ding.png" alt="Ding Logo"></p>
 
----
+# Ding
 
 ![Build](https://github.com/Bizyback/ding/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/23147.svg)](https://plugins.jetbrains.com/plugin/23147)
@@ -24,8 +24,11 @@ This is a minimal IntelliJ Platform Plugin that makes a notification sound for s
 
 - Using the IDE built-in plugin system:
 
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "ding"</kbd> >
-  <kbd>Install</kbd>
+  <kbd>Settings/Preferences</kbd> > 
+    <kbd>Plugins</kbd> > 
+      <kbd>Marketplace</kbd> > 
+        <kbd>Search for "ding"</kbd> >
+          <kbd>Install</kbd>
 
 - Manually:
 
