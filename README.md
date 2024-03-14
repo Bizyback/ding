@@ -1,5 +1,5 @@
 
-<p align="center"><img width=12% src="/.github/images/ding.png" alt="Ding Logo"></p>
+<p align="center"><img width=100% src="/.github/images/ding.png" alt="Ding Logo"></p>
 
 ---
 
