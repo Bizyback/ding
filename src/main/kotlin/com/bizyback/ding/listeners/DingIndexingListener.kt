@@ -3,8 +3,8 @@ package com.bizyback.ding.listeners
 import com.bizyback.ding.settings.DingSettings
 import com.bizyback.ding.utils.ring
 import com.intellij.openapi.components.service
-import com.intellij.util.indexing.diagnostic.ProjectIndexingHistory
-import com.intellij.util.indexing.diagnostic.ProjectIndexingHistoryListener
+import com.intellij.util.indexing.diagnostic.ProjectDumbIndexingHistory
+import com.intellij.util.indexing.diagnostic.ProjectIndexingActivityHistoryListener
 
 /**
  *
@@ -15,11 +15,11 @@ import com.intellij.util.indexing.diagnostic.ProjectIndexingHistoryListener
  * @time     12:29 am
  *
  */
-class DingIndexingListener : ProjectIndexingHistoryListener {
+class DingIndexingListener : ProjectIndexingActivityHistoryListener {
 
     private val settings = service<DingSettings>()
 
-    override fun onFinishedIndexing(projectIndexingHistory: ProjectIndexingHistory) {
+    override fun onFinishedDumbIndexing(history: ProjectDumbIndexingHistory) {
         if (settings.indexingEnabled) ring(settings.indexingTone)
     }
 
