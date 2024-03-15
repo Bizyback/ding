@@ -9,7 +9,7 @@ import com.bizyback.ding.DingBundle
 class MyProjectService(project: Project) {
 
     init {
-        thisLogger().info(DingBundle.message("notification.welcome", project.name))
+        thisLogger().info(DingBundle.message("notification.welcome.title"))
         thisLogger().warn("Don't forget to remove all non-needed sample code files with their corresponding registration entries in `plugin.xml`.")
     }
 
